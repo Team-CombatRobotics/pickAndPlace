@@ -20,32 +20,33 @@ void setup()
   Serial.begin(9600);
 }
 void mstop(){
-  motor.run(RELEASE);
+  motor1.run(RELEASE);
+  motor2.run(RELEASE);
 }
 void left(){
-  motor1.setspeed(200);
-  motor2.setspeed(200);
-  motor1.run.(FORWARD);
+  motor1.setSpeed(200);
+  motor2.setSpeed(200);
+  motor1.run(FORWARD);
   motor2.run(BACKWARD);
 }
 void right(){
-  motor1.setspeed(200);
-  motor2.setspeed(200);
-  motor1.run.(BACKWARD);
+  motor1.setSpeed(200);
+  motor2.setSpeed(200);
+  motor1.run(BACKWARD);
   motor2.run(FORWARD);
 }
 void forward(){
-  motor1.setspeed(200);
-  motor2.setspeed(200);
-  motor1.run.(FORWARD);
+  motor1.setSpeed(200);
+  motor2.setSpeed(200);
+  motor1.run(FORWARD);
   motor2.run(FORWARD);
 }
 void backward(){
-  motor1.setspeed(200);
-  motor2.setspeed(200);
-  motor1.run.(BACKWARD);
+  motor1.setSpeed(200);
+  motor2.setSpeed(200);
+  motor1.run(BACKWARD);
   motor2.run(BACKWARD);
- }
+}
 void f()
 {
   digitalWrite(13,HIGH);
