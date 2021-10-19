@@ -1,9 +1,14 @@
 #include<AFMotor.h>
+#include<servo.h>
 
 AF_DCMotor motor1(1);//Creating objects and initializing them to motor driver channel
 AF_DCMotor motor2(2);
 AF_DCMotor motor3(3);
 AF_DCMotor motor4(4);
+
+Servo gripper;
+gripper.attach(10);
+int servo_position = 0;
 
 int pinfb = 2;
 int pinlr = 13;
@@ -12,6 +17,7 @@ int pinlr_arm = 10;
 int arm_speed;
 int pwmud_arm;
 int pwmlr_arm;
+int servo_position = 0 ;
 
 void setup()
 {
@@ -25,6 +31,18 @@ void setup()
   pinMode(pinud_arm, INPUT);
   pinMode(pinlr_arm, INPUT);
   Serial.begin(9600);
+}
+void grip() {
+  for (int count = 0; count <= 180; count++)
+  {
+    gripper.write(count);
+  }
+}
+void ungrip() {
+  for (int count = 180; count >= 0; count--)
+  {
+    gripper.write(count);
+  }
 }
 void left_rotate() {
   motor4.setSpeed(20);
@@ -83,11 +101,12 @@ void down_alt() {
 }
 void loop()
 {
-  int pwmfb, pwmlr;
+  int pwmfb, pwmlr, pwm_grip;
   pwmfb = pulseIn(pinfb, HIGH);
   pwmlr = pulseIn(pinlr, HIGH);
   pwmud_arm = pulseIn(pinud_arm, HIGH);
   pwmlr_arm = pulseIn(pinlr_arm, HIGH);
+  pwm_grip = pulseIn(pin_grip, HIGH);
   if (pwmfb > 0)
   {
     if (pwmfb > 1800)
@@ -95,14 +114,14 @@ void loop()
       forward();
       //    printf("Forward");
       delay(100);
-      mstop();
+      //mstop();
     }
     if (pwmfb < 1250)
     {
       backward();
       //    printf("Backard");
       delay(100);
-      mstop();
+      //mstop();
     }
     else mstop();
   }
@@ -113,7 +132,7 @@ void loop()
       left();
       //    printf("Left");
       delay(100);
-      mstop();
+      //mstop();
     }
     if (pwmlr < 1250)
     {
@@ -158,6 +177,19 @@ void loop()
       delay(100);
     }
     else motor4.run(RELEASE);
+  }
+  if (pwm_grip > 0)
+  {
+    if (pwm_grip > )
+    {
+      grip();
+      delay(100);
+    }
+    if (pwm_grip < )
+    {
+      ungrip()
+      delay();
+    }
   }
   Serial.print("F/B : ");
   Serial.print(pwmfb);
